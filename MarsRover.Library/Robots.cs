@@ -4,9 +4,22 @@ namespace MarsRover.Library
 {
     public class Robots
     {
-        public int ID { get; set; } = 0;
+        bool kontrol = false;
         public int x { get; set; } = 0;
         public int y { get; set; } = 0;
         public string Direction { get; set; }
+
+        public bool xycontrol (int x,int y)
+        {
+            if(x<5 && x>=0 && y>=0 && y < 5)
+            {
+                kontrol = true;
+            }
+            else
+            {
+                kontrol = false;
+            }
+            return kontrol;
+        }
     }
 }

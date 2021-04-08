@@ -16,52 +16,95 @@ namespace MarsRover
             Robots rb = new Robots();
             string robotLoc;
             string way;
-            string[] wayinf;//yolun karakter olarak ayrılmış verisini tutan alan.
             string[] robInf;//robot bilgileri array olarak tutulan alan
 
-            Console.WriteLine("1. robotun kordinatlarını ve yönünü girin: ");
-
+            Console.WriteLine("Robotun kordinatlarını ve yönünü girin: ");
             robotLoc = Console.ReadLine();
-            Console.WriteLine("Yol bilgilerini giriniz:");
-            char chr = Console.ReadKey().KeyChar;
-            if (chr.ToString() == "M" && chr.ToString() == "L" && chr.ToString() == "R")
-            {
-
-            }
-            way = Console.ReadLine();
-            wayinf = way.Split();
-            robInf = robotLoc.Split();
+            robInf = robotLoc.Split(" ");
             if (robInf.Length == 3)
             {
                 rb.x = Convert.ToInt32(robInf[0]);//robotun bulunduğu x kordinatını atadım
                 rb.y = Convert.ToInt32(robInf[1]);//robotun bulunduğu y kord. atadım.
                 rb.Direction = robInf[2];//hangi yönde durduğunu atadım.
             }
-
-            if (rb.Direction == "N")
-            {
-                foreach (var route in wayinf)
+            Console.WriteLine("Yol bilgilerini giriniz:");
+                way = Console.ReadLine(); 
+                foreach (char c in way.ToCharArray())//girilen yol bilgisinin her karakterinin 
                 {
-                    if (route == "m")
+                    if (c.ToString() == "L")
                     {
-                        rb.x += 1;
+                        if (rb.Direction == "N")
+                        {
+                            rb.Direction = "W";
+                            continue;
+                        }
+                        else if (rb.Direction == "W")
+                        {
+                            rb.Direction = "S";
+                            continue;
+                        }
+                        else if (rb.Direction == "S")
+                        {
+                            rb.Direction = "E";
+                            continue;
+                        }
+                        else if (rb.Direction == "E")
+                        {
+                            rb.Direction = "N";
+                            continue;
+                        }
                     }
-                    else if (route == "l")
+                else if (c.ToString() == "R")
+                {
+                    if (rb.Direction == "N")
                     {
-                        rb.Direction = "e";
+                        rb.Direction = "E";
+                        continue;
                     }
-                    else
+                    else if (rb.Direction == "E")
                     {
                         rb.Direction = "S";
+                        continue;
+                    }
+                    else if (rb.Direction == "S")
+                    {
+                        rb.Direction = "W";
+                        continue;
+                    }
+                    else if (rb.Direction == "W")
+                    {
+                        rb.Direction = "N";
+                        continue;
                     }
                 }
-            }
-
-            //array a atıycam 
-            //o array içine döngüyle dolaşıcam 
-            //döngünün içinde l veya r görürse rb.direction değişikliği olucak 
-            //m harfi görürse yön ilerlemesi yapacak ama yönü w yada n ise y ekseni e yada s ise x ekseni değişecek 
-
+                else if(c.ToString() == "M")
+                    {
+                        if (rb.Direction == "N")
+                        {
+                            rb.y += 1;
+                            continue;
+                        }
+                        else if (rb.Direction == "S")
+                        {
+                            rb.y -= 1;
+                            continue;
+                        }
+                        else if (rb.Direction == "W")
+                        {
+                        
+                            rb.x -= 1;
+                            continue;
+                        }
+                        else if (rb.Direction == "E")
+                        {
+                            rb.x += 1;
+                            continue;
+                        }
+                    }             
+                }
+            
+            Console.Write("Son konum :{0} {1} {2} ", rb.x, rb.y, rb.Direction);
+            Console.ReadKey();
 
         }
     }

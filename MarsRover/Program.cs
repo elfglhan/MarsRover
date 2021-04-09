@@ -28,32 +28,32 @@ namespace MarsRover
                 rb.Direction = robInf[2];//hangi yönde durduğunu atadım.
             }
             Console.WriteLine("Yol bilgilerini giriniz:");
-                way = Console.ReadLine(); 
-                foreach (char c in way.ToCharArray())//girilen yol bilgisinin her karakterinin 
+            way = Console.ReadLine();
+            foreach (char c in way.ToCharArray())//girilen yol bilgisinin her karakterinin 
+            {
+                if (c.ToString() == "L")
                 {
-                    if (c.ToString() == "L")
+                    if (rb.Direction == "N")
                     {
-                        if (rb.Direction == "N")
-                        {
-                            rb.Direction = "W";
-                            continue;
-                        }
-                        else if (rb.Direction == "W")
-                        {
-                            rb.Direction = "S";
-                            continue;
-                        }
-                        else if (rb.Direction == "S")
-                        {
-                            rb.Direction = "E";
-                            continue;
-                        }
-                        else if (rb.Direction == "E")
-                        {
-                            rb.Direction = "N";
-                            continue;
-                        }
+                        rb.Direction = "W";
+                        continue;
                     }
+                    else if (rb.Direction == "W")
+                    {
+                        rb.Direction = "S";
+                        continue;
+                    }
+                    else if (rb.Direction == "S")
+                    {
+                        rb.Direction = "E";
+                        continue;
+                    }
+                    else if (rb.Direction == "E")
+                    {
+                        rb.Direction = "N";
+                        continue;
+                    }
+                }
                 else if (c.ToString() == "R")
                 {
                     if (rb.Direction == "N")
@@ -77,34 +77,53 @@ namespace MarsRover
                         continue;
                     }
                 }
-                else if(c.ToString() == "M")
+                else if (c.ToString() == "M")
+                {
+                    if (rb.Direction == "N")
                     {
-                        if (rb.Direction == "N")
+                        if (rb.y >= 0 && rb.y < 5)
                         {
                             rb.y += 1;
                             continue;
                         }
-                        else if (rb.Direction == "S")
+                    }
+                    else if (rb.Direction == "S")
+                    {
+                        if (rb.y >= 0 && rb.y < 5)
                         {
                             rb.y -= 1;
                             continue;
                         }
-                        else if (rb.Direction == "W")
+                    }
+                    else if (rb.Direction == "W")
+                    {
+                        if (rb.x >= 0 && rb.x < 5)
                         {
-                        
                             rb.x -= 1;
                             continue;
                         }
-                        else if (rb.Direction == "E")
+                    }
+                    else if (rb.Direction == "E")
+                    {
+                        if (rb.x >= 0 && rb.x < 5)
                         {
                             rb.x += 1;
                             continue;
                         }
-                    }             
+                    }
                 }
-            
-            Console.Write("Son konum :{0} {1} {2} ", rb.x, rb.y, rb.Direction);
-            Console.ReadKey();
+            }
+            if (rb.x >= 0 && rb.x < 5 && rb.y >= 0 && rb.y < 5)
+            {
+                Console.Write("Son konum :{0} {1} {2} ", rb.x, rb.y, rb.Direction);
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Belirtilen 5 * 5 boyutundaki alanın dışına çıkıldı.");
+                Console.Write("Son konum :{0} {1} {2} ", rb.x, rb.y, rb.Direction);
+                Console.ReadKey();
+            }
 
         }
     }

@@ -13,5 +13,13 @@ namespace MarsRover.Test
             bool rbt = robots.xycontrol(1,1);
             Assert.IsTrue(rbt,"kordinat deðerleri doðru aralýkta deðil");
         }
+        [TestMethod]
+        [TestCategory("Robot Direction Control")]
+        public void RobotDirection_Control()
+        {
+            Robots rb = new Robots();
+            bool rbt = rb.DirectionControl("N");
+            Assert.IsTrue(rbt, "Yön bilgisi giriþi yanlýþ");
+        }
     }
 }

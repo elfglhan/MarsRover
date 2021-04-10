@@ -21,5 +21,16 @@ namespace MarsRover.Library
             }
             return kontrol;
         }
+        public bool DirectionControl(string Direction) {
+        if(Direction=="N" || Direction=="W" || Direction =="S" || Direction=="E")
+            {
+                kontrol = true;
+                 }
+            else
+            {
+                kontrol = false;
+            }
+        return kontrol;
+        }
     }
 }
